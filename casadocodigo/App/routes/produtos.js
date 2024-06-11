@@ -1,3 +1,4 @@
+const { check, validationResult, body } = require('express-validator');
 
 
 module.exports = function(app){
@@ -23,9 +24,23 @@ module.exports = function(app){
         res.render('produtos/form')
     })
 
-    app.post('/produtos', function(req, res){
-        var produto = req.body
+    app.post('/produtos', 
+    body('titulo').notEmpty().withMessage('O campo não pode estar em branco'),
+    
+    function(req, res){
         
+        const erros = validationResult(req)
+
+        if (erros.isEmpty()) {
+            console.log('Cadastrado com sucesso!')
+        }else{
+            res.render('produtos/form')
+            console.log('Gerou erros.')
+            return
+        }
+
+        var produto = req.body
+
         var connection = app.infra.connectionFactory()
 
         var produtosDAO = new app.infra.ProdutosDAO(connection)

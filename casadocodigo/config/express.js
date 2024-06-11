@@ -9,6 +9,7 @@ module.exports = function() {
     app.set('view engine', 'ejs')
     app.set('views', './App/views')
     app.use(bodyParcer.urlencoded({extended: true}))
+    app.use(bodyParcer.json())
     load('routes', {cwd: 'app'})
         .then('infra')
         .into(app)

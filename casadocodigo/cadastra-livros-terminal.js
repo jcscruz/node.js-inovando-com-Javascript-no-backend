@@ -19,7 +19,7 @@ var configuracoes = {
 })
 
 var produto = {
-    titulo: 'Mais sobre Node',
+    titulo: '',
     descricao: 'node, javascript e um pouco sobre http'
 }
 

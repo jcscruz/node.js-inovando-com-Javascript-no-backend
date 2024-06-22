@@ -1,13 +1,25 @@
 var mysql = require('mysql')
 
 function createDBconnection(){
-    var connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'led_site',
-        password: 'pSz6#I52E4YG',
-        database: 'led_site',
-        port: '3306'
-    })
+    if(!process.env.NODE_ENV){
+        var connection = mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: 'root',
+            database: 'nds',
+            port: '3306'
+        })
+    }
+
+    if(process.env.NODE_ENV == 'test'){
+        var connection = mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: 'root',
+            database: 'nds_test',
+            port: '3306'
+        })
+    }
 
     return connection
 
